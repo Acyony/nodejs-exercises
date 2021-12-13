@@ -2,7 +2,9 @@ const Student = require('../model/studentModel');
 const Class = require('../model/classModel');
 const {validationResult} = require("express-validator");
 
-//add a new class
+
+/* -----=^.^=---------add a new class-----=^.^=---------*/
+
 async function addClass(req, res, next) {
     console.log("=^.^= Creating New Class!")
 
@@ -28,7 +30,8 @@ async function addClass(req, res, next) {
 }
 
 
-//all classes
+/* -----=^.^=---------all classes-----=^.^=---------*/
+
 async function allClasses(req, res, next) {
     try {
         const classes = await Class.find();
@@ -62,7 +65,8 @@ async function addStudentToClass(req, res, next) {
             return;
         }
 
-        // to add a student into a class
+        /* -----=^.^=---------to add a student into a class-----=^.^=---------*/
+
         if (!klass.participants.find((s) => s._id.toString() === sid)) {
             klass.participants.push(sid);
             klass.save();
@@ -76,8 +80,8 @@ async function addStudentToClass(req, res, next) {
     }
 }
 
+/* -----=^.^=---------classParticipants-----=^.^=---------*/
 
-//classParticipants
 async function stdClasses(req, res, next) {
     try {
         const klasses = await Class.find({participants: req.params.sid})
