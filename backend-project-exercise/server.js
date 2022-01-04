@@ -5,13 +5,21 @@ const logger = require('morgan');
 const dotenv = require('dotenv');
 dotenv.config();
 
-
+//create server app
+const app = express();
 
 const userRouter = require('./src/routers/userRouter');
 
+// "Informing" the express to use the EJS as views engine
+app.set('views', __dirname+ '/views');
+app.set('view engine', 'ejs');
 
-//create server app
-const app = express();
+// Define I want to use static archives
+app.use(express.static('public'));
+
+app.get('/', (req, res) => {
+    res.render("index")
+})
 
 //db connection
 mongoose.connect(process.env.DB_CONNECTION)
